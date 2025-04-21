@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Profile from './Profile';
 import './Header.css';
+import { Prev } from 'react-bootstrap/esm/PageItem';
 
 function Header() {
     const [location, setLocation] = useState("Fetching location...");
-    const [profile,setProfile] = useState(false)
+    const [profile, setProfile] = useState(false)
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -30,49 +32,44 @@ function Header() {
         }
     }, []);
 
-    const handleChange = () => { 
-        setProfile(true)
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('.......');
-        }
-        
-        
+    const handleChange = () => {
+        setProfile(PrevState => !PrevState)
     }
-
     return (
-        <nav>
-            <div className="logo-div">
-                <img src="/HeaderImg/Logo(2).png" alt="Logo" />
-                {/* <h5 className="logo-name">QuickCart</h5> */}
-            </div>
-
-            <div className="location-div" onClick={() => window.location.href = "/location"}>
-                <h4>
-                    Delivery in <span className="highlight">10 Minutes</span>
-                </h4>
-                <div className="location-clickable">
-                    <p>{location}</p>
-                    <img src="/HeaderImg/map-location-svgrepo-com.svg" alt="Dropdown Icon" className="dropdown-icon" />
+        <>
+            <nav>
+                <div className="logo-div">
+                    <img src="/HeaderImg/Logo(2).png" alt="Logo" />
                 </div>
-            </div>
 
-            <div className="search-container">
-                <input type="search" id="search" placeholder="Search for..." />
-                <img src="/HeaderImg/search-alt-svgrepo-com.svg" alt="Search Icon" className="search-icon" />
-            </div>
-    
-            <div className="profile-div">
-                <img src="/HeaderImg/profile-user-svgrepo-com.svg" alt="Profile" onClick={handleChange}/>
-                <span>Profile</span>
-            </div>
+                <div className="location-div" onClick={() => window.location.href = "/location"}>
+                    <h4>
+                        Delivery in <span className="highlight">10 Minutes</span>
+                    </h4>
+                    <div className="location-clickable">
+                        <p>{location}</p>
+                        <img src="/HeaderImg/map-location-svgrepo-com.svg" alt="Dropdown Icon" className="dropdown-icon" />
+                    </div>
+                </div>
 
-            <div className="cart-div">
-                <img src="/HeaderImg/cart-large-svgrepo-com.svg" alt="Cart" />
-                <span>Cart</span>
-            </div>
-        </nav>
+                <div className="search-container">
+                    <input type="search" id="search" placeholder="Search for..." />
+                    <img src="/HeaderImg/search-alt-svgrepo-com.svg" alt="Search Icon" className="search-icon" />
+                </div>
+
+                <div className="profile-div">
+                    <img src="/HeaderImg/profile-user-svgrepo-com.svg" alt="Profile" onClick={handleChange} />
+                    <span onClick={handleChange}>Profile</span>
+
+                </div>
+
+                <div className="cart-div">
+                    <img src="/HeaderImg/cart-large-svgrepo-com.svg" alt="Cart" />
+                    <span>Cart</span>
+                </div>
+            </nav>
+            {profile && <Profile />}
+        </>
     );
 }
 

@@ -1,0 +1,3 @@
+for server =>
+        npm i json-server
+        json-server --watch data.json

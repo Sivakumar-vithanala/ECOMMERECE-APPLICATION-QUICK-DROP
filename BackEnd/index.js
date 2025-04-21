@@ -2,19 +2,13 @@ import express from "express";
 import cors from "cors";
 import fs from "fs";
 import path from "path";
-import { json } from "body-parser";
-import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
-
 
 dotenv.config();
 const PORT = process.env.PORT;
-const app = express();
-
 app.use(cors());
-app.use(helmet());
 app.use(express.json());
-
+const app = express();
 
 app.get("/GET", (req, res) => {
   console.log("method get");

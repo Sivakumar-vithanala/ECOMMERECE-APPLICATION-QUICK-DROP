@@ -1,12 +1,9 @@
-import { useState } from 'react'
-import Header from './Components/Header.jsx';
-import Footer from './Components/Footer.jsx';
-// import './App.css'
+import './App.css'
+import { LandingPage } from './Pages/landingPage.jsx';
 function App() {
   return (
     <>
-      <Header />
-      {/* <Footer/> */}
+    <LandingPage/>
     </>
   )
 }
